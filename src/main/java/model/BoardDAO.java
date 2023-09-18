@@ -57,69 +57,68 @@ public class BoardDAO {
         return rowCount;
     }
 
-    //게시글 수정
-//    public int updateBoard(BoardDO boardDO){
-//        int rowCount = 0;
-//
-//        sql = "update board set userId = ?, title = ?, contents = ?, area = ?, picture = ?, writedate = ? " +
-//                "where boardNo = ?";
-//
-//        try{
-//            pstmt = conn.prepareStatement(sql);
-//            pstmt.setString(1, boardDO.getUserId());
-//            pstmt.setString(2, boardDO.getTitle());
-//            pstmt.setString(3, boardDO.getContents());
-//            pstmt.setString(4, boardDO.getArea());
-//            pstmt.setString(5, boardDO.getPicture());
-//            pstmt.setString(6, boardDO.getWritedate());
-//            pstmt.setInt(7, boardDO.getBoardNo());
-//
-//
-//            rowCount = pstmt.executeUpdate();
-//        }
-//        catch(Exception e){
-//            e.printStackTrace();
-//        }
-//        finally{
-//            if(pstmt != null){
-//                try{
-//                    pstmt.close();
-//                }
-//                catch(Exception e){
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        return rowCount;
-//    }
+//    게시글 수정
+    public int updateBoard(BoardDO boardDO){
+        int rowCount = 0;
 
-    //게시글 삭제
-//    public int deleteBoard(BoardDO boardDO){
-//        int rowCount = 0;
-//
-//        sql = "delete from board where boardNo = ?";
-//
-//        try {
-//            pstmt = conn.prepareStatement(sql);
-//            pstmt.setInt(1, boardDO.getBoardNo());
-//
-//            rowCount = pstmt.executeUpdate();
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//        finally{
-//            if(pstmt != null){
-//                try{
-//                    pstmt.close();
-//                }
-//                catch(Exception e){
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//
-//        return rowCount;
-//    }
+        sql = "update board set userId = ?, title = ?, contents = ?, area = ?" +
+                "where boardNo = ?";
+
+        try{
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, boardDO.getUserId());
+            pstmt.setString(2, boardDO.getTitle());
+            pstmt.setString(3, boardDO.getContents());
+            pstmt.setString(4, boardDO.getArea());
+
+            pstmt.setInt(5, boardDO.getBoardNo());
+
+
+            rowCount = pstmt.executeUpdate();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            if(pstmt != null){
+                try{
+                    pstmt.close();
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return rowCount;
+    }
+
+//    게시글 삭제
+    public int deleteBoard(int boardDO){
+        int rowCount = 0;
+
+        sql = "delete from board where boardNo = ?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, boardDO);
+
+            rowCount = pstmt.executeUpdate();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            if(pstmt != null){
+                try{
+                    pstmt.close();
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return rowCount;
+    }
 
     //전체 게시글 불러오기
     public ArrayList<BoardDO> getAllBoard () {
@@ -132,6 +131,7 @@ public class BoardDAO {
 
             while(rs.next()) {
                 BoardDO boardDO = new BoardDO();
+                boardDO.setBoardNo(rs.getInt("boardNo"));
                 boardDO.setUserId(rs.getString("userId"));
                 boardDO.setTitle(rs.getString("title"));
                 boardDO.setArea(rs.getString("area"));
@@ -155,6 +155,40 @@ public class BoardDAO {
         }
 
         return boardList;
+    }
+
+    //하나의 게시글 불러오기
+    public BoardDO getBoard(int boardNo){
+
+        BoardDO boardDO = new BoardDO();
+        sql = "select * from board where boardno = ?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, boardNo);
+
+            rs = pstmt.executeQuery();
+
+            boardDO.setUserId(rs.getString("userId"));
+            boardDO.setTitle(rs.getString("title"));
+            boardDO.setArea(rs.getString("area"));
+            boardDO.setContents(rs.getString("contents"));
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            if(pstmt != null){
+                try{
+                    pstmt.close();
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return boardDO;
     }
 
     //검색된 게시글 불러오기
