@@ -1,8 +1,10 @@
 <%@ page import="model.BoardDAO" %>
 <%@ page import="model.BoardDO" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+
 <%
     BoardDAO boardDAO = (BoardDAO)session.getAttribute("boardDAO");
+
     if(boardDAO == null) {
         boardDAO = new BoardDAO();
         session.setAttribute("boardId", new BoardDAO());
@@ -18,11 +20,11 @@
         boardDO.setContents(request.getParameter("contents"));
 
         boardDAO.insertBoard(boardDO);
-        request.setAttribute("boardList", boardDAO.getAllBoard());
-        pageContext.forward("/WEB-INF/views/boardListPage_back.jsp");
+//        request.setAttribute("boardList", boardDAO.getAllBoard());
+//        pageContext.forward("../WEB-INF/views/boardPage.jsp");
     }
     else {
         request.setAttribute("boardList", boardDAO.getAllBoard());
-        pageContext.forward("/WEB-INF/views/boardPage_back.jsp");
+        pageContext.forward("../WEB-INF/views/boardPage.jsp");
     }
 %>

@@ -1,7 +1,7 @@
 package model;
+
 import java.sql.*;
 import java.util.ArrayList;
-
 
 public class MemberDAO {
     private Connection conn;
@@ -17,7 +17,7 @@ public class MemberDAO {
         if(conn == null){
             try{
                 Class.forName(jdbc_driver);
-                conn = DriverManager.getConnection(jdbc_url, "scott", "tiger");
+                conn = DriverManager.getConnection(jdbc_url, "system", "oracle");
             }
             catch(Exception e){
                 e.printStackTrace();

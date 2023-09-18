@@ -4,7 +4,9 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/boardPage.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/controller/boardListPageController.jsp" value="file://$PROJECT_DIR$/src/main/webapp/controller" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/controller/loginController.jsp" value="file://$PROJECT_DIR$/src/main/webapp/controller" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/uploadForm.html" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>
     </option>
   </component>
