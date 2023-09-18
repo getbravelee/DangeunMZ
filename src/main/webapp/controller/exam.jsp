@@ -1,30 +1,8 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="chap09.UserInfoDO" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%
-    if(request.getMethod().equals("POST")) {
-        request.setCharacterEncoding("UTF-8");
-    }
-%>
 
-<jsp:useBean id="userDAO" class="chap09.UserInfoDAO" scope="session" />
-<jsp:useBean id="userDO" class="chap09.UserInfoDO" scope="page" />
-<jsp:setProperty name="userDO" property="*" />
 
-<%
-    // 이번 주말 목표 : jsp 페이지에서 boardList 구현해보기!!
-    if(request.getMethod().equals("POST")) {
-        userDAO.insertUserInfo(userDO);
-    }
-
-    ArrayList<UserInfoDO> userList = userDAO.getAllUserInfo();
-    String content = "";
-
-    for(UserInfoDO udo : userList) {
-        content += "<li>이름: " + udo.getUsername() + " | 이메일: " + udo.getEmail() + "</li>";
-    }
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,9 +32,9 @@
 
 <h3>전체 회원 목록</h3>
 <ol>
-    <%= content %>
+    <c:forEach items="${userList}" var="userDO">
+        <li>${userDO.username} | 이메일: ${userDO.email}</li>
+    </c:forEach>
 </ol>
-
-
 </body>
 </html>
