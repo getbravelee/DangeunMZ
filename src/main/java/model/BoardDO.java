@@ -7,8 +7,6 @@ public class BoardDO {
     private String title;
     private String contents;
     private String area;
-    private String picture;
-    private String writedate;
 
     public BoardDO(){
     }
@@ -53,19 +51,4 @@ public class BoardDO {
         this.area = area;
     }
 
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-
-    public String getWritedate() {
-        return writedate;
-    }
-
-    public void setWritedate(String writedate) {
-        this.writedate = writedate;
-    }
 }
