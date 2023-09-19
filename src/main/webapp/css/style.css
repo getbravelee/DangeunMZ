@@ -280,13 +280,13 @@
 }
 
 .timeLine-body .writer {
-    color: rgb(128, 128, 128);
+    color: gray;
 }
 
 .timeLine-body .content-date {
     position: absolute;
     bottom: 0;
-    color: rgb(128, 128, 128);
+    color: gray;
 }
 .container-option {
     position: absolute;
