@@ -53,7 +53,6 @@ public class BoardDAO {
                 }
             }
         }
-
         return rowCount;
     }
 
@@ -124,7 +123,6 @@ public class BoardDAO {
     public ArrayList<BoardDO> getAllBoard () {
         ArrayList<BoardDO> boardList = new ArrayList<BoardDO>();
         sql = "select * from board";
-
         try {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
@@ -140,7 +138,7 @@ public class BoardDAO {
                 boardList.add(boardDO);
             }
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
         finally {
@@ -148,14 +146,15 @@ public class BoardDAO {
                 try {
                     stmt.close();
                 }
-                catch(Exception e) {
+                catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
-
         return boardList;
     }
+
+
 
     //하나의 게시글 불러오기
     public BoardDO getBoard(int boardNo){
@@ -169,10 +168,13 @@ public class BoardDAO {
 
             rs = pstmt.executeQuery();
 
-            boardDO.setUserId(rs.getString("userId"));
-            boardDO.setTitle(rs.getString("title"));
-            boardDO.setArea(rs.getString("area"));
-            boardDO.setContents(rs.getString("contents"));
+            while(rs.next()) {
+                boardDO.setBoardNo(boardNo);
+                boardDO.setUserId(rs.getString("userId"));
+                boardDO.setTitle(rs.getString("title"));
+                boardDO.setArea(rs.getString("area"));
+                boardDO.setContents(rs.getString("contents"));
+            }
 
         }catch(Exception e){
             e.printStackTrace();
@@ -187,7 +189,6 @@ public class BoardDAO {
                 }
             }
         }
-
         return boardDO;
     }
 

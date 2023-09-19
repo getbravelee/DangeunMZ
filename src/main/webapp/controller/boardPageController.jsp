@@ -20,7 +20,7 @@
         if(request.getParameter("update") != null && !"null".equals(request.getParameter("update"))){
             int num = Integer.parseInt(request.getParameter("update"));
 
-            request.setAttribute("boardDO",boardDAO.getBoard(num));
+            request.setAttribute("board",boardDAO.getBoard(num));
             pageContext.forward("/WEB-INF/views/updateBoardPage_back.jsp");
         }
         // 수정 버튼 -> 수정하기
