@@ -35,8 +35,7 @@
 
             boardDAO.updateBoard(boardDO);
             request.setAttribute("boardList", boardDAO.getAllBoard());
-            pageContext.forward("/WEB-INF/views/boardListPage_back.jsp");
-
+            pageContext.forward("/WEB-INF/views/boardListPage.jsp");
         }
         // 삭제 버튼 누르면 작동
         else if (request.getParameter("delete") != null && !"null".equals(request.getParameter("delete"))) {
@@ -44,8 +43,37 @@
             boardDAO.deleteBoard(num);
 
             request.setAttribute("boardList", boardDAO.getAllBoard());
-            pageContext.forward("/WEB-INF/views/boardListPage_back.jsp");
+            pageContext.forward("/WEB-INF/views/boardListPage.jsp");
         }
+        //view jsp 로 넘기기
+        else if (request.getParameter("page") != null && !"null".equals(request.getParameter("page"))) {
+            String select_item = request.getParameter("page");
+            String pageURL = null;
+
+            if(select_item.equals("홈"))
+            {
+                request.setAttribute("boardList", boardDAO.getAllBoard());
+                pageURL = "/WEB-INF/views/index.jsp";
+            }
+            else if(select_item.equals("게시판"))
+            {
+                request.setAttribute("boardList", boardDAO.getAllBoard());
+                pageURL = "/WEB-INF/views/boardListPage.jsp";
+            }
+            else if(select_item.equals("게시글 작성"))
+            {
+                pageURL = "/WEB-INF/views/boardPage.jsp";
+            }
+             pageContext.forward(pageURL);
+        }
+
+        //검색
+        else if (request.getParameter("search") != null && !"null".equals(request.getParameter("search"))) {
+            String keyword = request.getParameter("search");
+            request.setAttribute("boardList", boardDAO.getSearchBoard(keyword));
+            pageContext.forward("/WEB-INF/views/boardListPage.jsp");
+        }
+
         //post 기본 화면
         else {
             BoardDO boardDO = new BoardDO();
@@ -56,13 +84,14 @@
 
             boardDAO.insertBoard(boardDO);
             request.setAttribute("boardList", boardDAO.getAllBoard());
-            pageContext.forward("/WEB-INF/views/boardListPage_back.jsp");
+            pageContext.forward("/WEB-INF/views/boardListPage.jsp");
         }
     }
     // get 방식 기본화면
     else {
         request.setAttribute("boardList", boardDAO.getAllBoard());
-        pageContext.forward("/WEB-INF/views/boardPage_back.jsp");
+        pageContext.forward("/WEB-INF/views/boardPage.jsp");
     }
 
 %>
+
