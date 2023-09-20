@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +12,7 @@
     <link href="../../img/logo1.ico" rel="shortcut icon" type="image/x-icon">
     <script src="<c:url value="https://kit.fontawesome.com/f399b95bac.js"/>" crossorigin="anonymous"></script>
     <script src="<c:url value="https://unpkg.com/axios/dist/axios.min.js"/>"></script>
-    <title>당근맛집 회원가입</title>
+    <title>당근맛집 내 계정</title>
 </head>
 
 <body>
@@ -21,23 +22,22 @@
             <div class="header-left">
                 <h1 class="brand">C</h1>
             </div>
-            <form class="keyword-search keyword-search-main" name="search" method="post">
+            <form class="keyword-search keyword-search-main" name="search" action="searchListPage.html">
                 <input type="text" name='search' id="search" class="searchText" placeholder="지역, 음식, 레스토랑명 검색" required value>
                 <button type="submit" class="searchButton">
                     <i class="fa-solid fa-magnifying-glass" style="color: #e2520f;"></i>
                 </button>
             </form>
-            <form method="post">
-                <button class="menu" name="login" value="login">
-                    <i class="fa-solid fa-bars" style="color: #e2520f;"></i>
-                </button>
-            </form>
+            <button class="menu">
+                <i class="fa-solid fa-bars" style="color: #e2520f;"></i>
+            </button>
         </div>
     </header>
 
+
     <section class="category">
         <div id="container-category">
-            <form method="post" class="ctgr" action="../../dangeun_mz_war/controller/memberController.jsp">
+            <form method="post" class="ctgr">
                 <input name="page" type="submit" class="btn-category" value="홈">
                 <input name="page" type="submit" class="btn-category" value="게시판">
                 <input name="page" type="submit" class="btn-category" value="게시글 작성">
@@ -47,29 +47,29 @@
 
     <main>
         <div class="section-title">
-            <h1>회원가입</h1>
+            <h1>나의 계정</h1>
         </div>
 
         <form class="board-form" method="post">
             <fieldset>
                 <div class="form-group">
                     <h3>아이디</h3>
-                    <input type="text" name="userId" id="userId" class='form-input' placeholder="아이디를 입력하세요">
+                    <input type="text" name="userId" id="userId" class='form-input' value="${member.userId}" readonly>
                 </div>
 
                 <div class="form-group">
                     <h3>비밀번호</h3>
-                    <input type="password" name="password" id="password" class='form-input' placeholder="비밀번호를 입력하세요">
+                    <input type="password" name="password" id="password" class='form-input'>
                 </div>
 
                 <div class="form-group">
                     <h3>이메일</h3>
-                    <input type="email" name="email" id="email" class='form-input' placeholder="이메일을 입력하세요">
+                    <input type="email" name="email" id="email" class='form-input' value="${member.email}">
                 </div>
 
                 <div class="form-group">
                     <h3>이름</h3>
-                    <input type="text" name="name" id="name" class='form-input' placeholder="이름을 입력하세요">
+                    <input type="text" name="name" id="name" class='form-input' value="${member.name}">
                 </div>
 
                 <div class="form-group">
@@ -82,12 +82,17 @@
 
                 <div class="form-group">
                     <h3>거주 지역</h3>
-                    <input type="text" name="area" id="area" class='form-input' placeholder="지역를 입력하세요">
+                    <input type="text" name="area" id="area" class='form-input'value="${member.area}">
                 </div>
 
                 <div class="form-group">
-                    <input type="hidden" name="command" value="insertMember" />
-                    <input type="submit" class="btn btn-red" value="회원가입"/>
+                    <input type="hidden" name="command" value="updateMember" />
+                    <input type="submit" class="btn btn-red" value="수정"/>
+                </div>
+
+                <div class="form-group">
+                    <input type="hidden" name="command" value="deleteMember" />
+                    <input type="submit" class="btn btn-red" value="회원탈퇴"/>
                 </div>
 
 

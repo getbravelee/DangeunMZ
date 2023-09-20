@@ -22,6 +22,42 @@ public class MemberDAO {
             }
         }
     }
+    //하나의 멤버 불러오기
+    public MemberDO getMember(String userId){
+
+        MemberDO memberDO = new MemberDO();
+        sql = "select * from Member where userId = ?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                memberDO.setUserId(rs.getString("userId"));
+                memberDO.setPassword(rs.getString("password"));
+                memberDO.setEmail(rs.getString("email"));
+                memberDO.setName(rs.getString("name"));
+                memberDO.setGender(rs.getString("gender"));
+                memberDO.setArea(rs.getString("area"));
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            if(pstmt != null){
+                try{
+                    pstmt.close();
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return memberDO;
+    }
 
     //로그인
     public int isLogin(String userId, String password) {
@@ -49,10 +85,10 @@ public class MemberDAO {
     }
 
     // 회원가입
-    public int insertMemberInfo(MemberDO memberDO) {
+    public int insertMember(MemberDO memberDO) {
         int rowCount = 0;
 
-        if(checkMemberInfo(memberDO)){
+        if(checkMember(memberDO)){
 
             sql = "insert into member (userId, password, email, name, gender, area) values (?,?,?,?,?,?)";
 
@@ -84,7 +120,7 @@ public class MemberDAO {
     }
 
     // 회원 중복 확인
-    public boolean checkMemberInfo(MemberDO memberDO) {
+    public boolean checkMember(MemberDO memberDO) {
         boolean checkResult = true;
 
         try{
@@ -113,16 +149,21 @@ public class MemberDAO {
 
         return checkResult;
     }
-
-    // 회원탈퇴
-    public int deleteMemberInfo(MemberDO memberDO) {
+    //회원 정보 수정
+    public int updateMember(MemberDO memberDO) {
         int rowCount = 0;
 
-        sql = "delete from member where userId = ?";
+        sql = "update member set password = ?, email = ?, name = ?, gender = ?, area = ? where userId = ?";
 
         try{
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, memberDO.getUserId());
+            pstmt.setString(1, memberDO.getPassword());
+            pstmt.setString(2, memberDO.getEmail());
+            pstmt.setString(3, memberDO.getName());
+            pstmt.setString(4, memberDO.getGender());
+            pstmt.setString(5, memberDO.getArea());
+            pstmt.setString(6, memberDO.getUserId());
+            rowCount = pstmt.executeUpdate();
 
             rowCount = pstmt.executeUpdate();
         }
@@ -140,6 +181,37 @@ public class MemberDAO {
             }
         }
 
+        return rowCount;
+    }
+
+    // 회원탈퇴(탈퇴 성공시 1 / 실패시 0 반환)
+    public int deleteMember(String userId, String password) {
+        int rowCount = 0;
+
+        if(isLogin(userId, password) == 1) {
+
+            sql = "delete from member where userId = ?";
+
+            try{
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, userId);
+
+                rowCount = pstmt.executeUpdate();
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            finally{
+                if(pstmt != null){
+                    try{
+                        pstmt.close();
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
         return rowCount;
     }
 }

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 
@@ -27,8 +28,8 @@
                             <i class="fa-solid fa-magnifying-glass" style="color: #e2520f;"></i>
                     </button>
             </form>
-            <form method="post">
-                <button class="menu" name="login" value="login">
+            <form method="post" action="../../dangeun_mz_war/controller/memberController.jsp">
+                <button class="menu" name="command" value="myLog">
                     <i class="fa-solid fa-bars" style="color: #e2520f;"></i>
                 </button>
             </form>
@@ -37,7 +38,7 @@
 
     <section class="category">
         <div id="container-category">
-            <form method="post" class="ctgr">
+            <form method="post" class="ctgr" action="../../dangeun_mz_war/controller/boardPageController.jsp">
                 <input name="page" type="submit" class="btn-category" value="홈">
                 <input name="page" type="submit" class="btn-category" value="게시판">
                 <input name="page" type="submit" class="btn-category" value="게시글 작성">

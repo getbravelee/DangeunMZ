@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%
+    String userId = (String)session.getAttribute("userId");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -28,8 +31,8 @@
                     <i class="fa-solid fa-magnifying-glass" style="color: #e2520f;"></i>
                 </button>
             </form>
-            <form method="post">
-            <button class="menu" name="login" value="login">
+            <form method="post" action="../../dangeun_mz_war/controller/memberController.jsp">
+                <button class="menu" name="command" value="myLog">
                 <i class="fa-solid fa-bars" style="color: #e2520f;"></i>
             </button>
             </form>
@@ -62,14 +65,16 @@
                                     ${boardDO.contents}
                             </div>
                             <div class="container-option">
-                                <form method="POST">
-                                    <input type="hidden" name="update" value="${boardDO.boardNo}"/>
-                                    <input type="submit" value="수정"/>
-                                </form>
-                                <form method="POST">
-                                    <input type="hidden" name="delete" value="${boardDO.boardNo}"/>
-                                    <input type="submit" value="삭제"/>
-                                </form>
+                                <c:if test="${boardDO.userId eq userId}">
+                                    <form method="POST">
+                                        <input type="hidden" name="update" value="${boardDO.boardNo}"/>
+                                        <input type="submit" value="수정"/>
+                                    </form>
+                                    <form method="POST">
+                                        <input type="hidden" name="delete" value="${boardDO.boardNo}"/>
+                                        <input type="submit" value="삭제"/>
+                                    </form>
+                                </c:if>
                             </div>
                                 <%--                            <div class="content-date">방문일 : ${boardDO.writeDate}</div>--%>
                         </div>
