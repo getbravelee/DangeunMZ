@@ -28,9 +28,11 @@
                     <i class="fa-solid fa-magnifying-glass" style="color: #e2520f;"></i>
                 </button>
             </form>
-            <button class="menu">
-                <i class="fa-solid fa-bars" style="color: #e2520f;"></i>
-            </button>
+            <form method="post">
+                <button class="menu" name="login" value="login">
+                    <i class="fa-solid fa-bars" style="color: #e2520f;"></i>
+                </button>
+            </form>
         </div>
     </header>
 

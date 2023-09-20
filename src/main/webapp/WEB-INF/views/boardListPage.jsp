@@ -21,17 +21,18 @@
             <div class="header-left">
                 <h1 class="brand">C</h1>
             </div>
-            <form class="keyword-search keyword-search-main" name="search"
-                  method="post">
+            <form class="keyword-search keyword-search-main" name="search" method="post">
                 <input type="text" name='search' id="search" class="searchText" placeholder="지역, 음식, 레스토랑명 검색" required
                        value>
                 <button type="submit" class="searchButton">
                     <i class="fa-solid fa-magnifying-glass" style="color: #e2520f;"></i>
                 </button>
             </form>
-            <button class="menu">
+            <form method="post">
+            <button class="menu" name="login" value="login">
                 <i class="fa-solid fa-bars" style="color: #e2520f;"></i>
             </button>
+            </form>
         </div>
     </header>
     <section class="category">
