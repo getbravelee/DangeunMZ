@@ -1,11 +1,9 @@
 package model;
 import java.sql.*;
-import java.util.ArrayList;
 
 
 public class MemberDAO {
     private Connection conn;
-    private Statement stmt;
     private PreparedStatement pstmt;
     private ResultSet rs;
     private String sql;
@@ -25,21 +23,47 @@ public class MemberDAO {
         }
     }
 
+    //로그인
+    public int isLogin(String userId, String password) {
+
+        sql = "select password from member where userId =?";
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                if(rs.getString(1).equals(password)) {
+                    return 1; // 로그인 성공
+                }
+                else
+                    return 0; // 비밀번호 불일치
+            }
+            return -1;	// 아이디가 없음
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return -2; // 데이터베이스 오류
+    }
+
     // 회원가입
     public int insertMemberInfo(MemberDO memberDO) {
         int rowCount = 0;
 
-        ResultSet checkMember = checkMemberInfo(memberDO);
+        if(checkMemberInfo(memberDO)){
 
-        if(checkMember == null){
-
-            sql = "insert into member (userId, password) values (?,?)";
+            sql = "insert into member (userId, password, email, name, gender, area) values (?,?,?,?,?,?)";
 
             try{
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1, memberDO.getUserId());
                 pstmt.setString(2, memberDO.getPassword());
-
+                pstmt.setString(3, memberDO.getEmail());
+                pstmt.setString(4, memberDO.getName());
+                pstmt.setString(5, memberDO.getGender());
+                pstmt.setString(6, memberDO.getArea());
                 rowCount = pstmt.executeUpdate();
             }
             catch(Exception e){
@@ -60,15 +84,18 @@ public class MemberDAO {
     }
 
     // 회원 중복 확인
-    public ResultSet checkMemberInfo(MemberDO memberDO) {
-
-        sql = "select * from member where userId = ?";
+    public boolean checkMemberInfo(MemberDO memberDO) {
+        boolean checkResult = true;
 
         try{
+            sql = "select userId from member where userId = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, memberDO.getUserId());
 
             rs = pstmt.executeQuery();
+            if(rs.next()) {
+                checkResult = false;
+            }
         }
         catch(Exception e){
             e.printStackTrace();
@@ -84,14 +111,13 @@ public class MemberDAO {
             }
         }
 
-        return rs;
+        return checkResult;
     }
 
     // 회원탈퇴
     public int deleteMemberInfo(MemberDO memberDO) {
         int rowCount = 0;
 
-        //애매하네 찾아보기
         sql = "delete from member where userId = ?";
 
         try{
