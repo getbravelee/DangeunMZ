@@ -193,43 +193,48 @@ public class BoardDAO {
     }
 
     //검색된 게시글 불러오기
-//    public ArrayList<BoardDO> getSearchBoard(String keyword){
-//
-//        ArrayList<BoardDO> boardList = new ArrayList<BoardDO>();
-//        sql = "select * from board where title like ? or contents like ? or area like ?";
-//        try {
-//            pstmt = conn.prepareStatement(sql);
-//            rs = pstmt.executeQuery(sql);
-//            pstmt.setString(1,"%" + keyword + "%");
-//            pstmt.setString(2,"%" + keyword + "%");
-//            pstmt.setString(3,"%" + keyword + "%");
-//
-//            while(rs.next()) {
-//                BoardDO boardDO = new BoardDO();
-//                boardDO.setUserId(rs.getString("userId"));
-//                boardDO.setTitle(rs.getString("title"));
-//                boardDO.setContents(rs.getString("contents"));
-//                boardDO.setArea(rs.getString("area"));
-//                boardDO.setPicture(rs.getString("picture"));
-//                boardDO.setWritedate(rs.getString("writedate"));
-//
-//                boardList.add(boardDO);
-//            }
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        finally {
-//            if(stmt != null) {
-//                try {
-//                    stmt.close();
-//                }
-//                catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        return boardList;
-//    }
+    public ArrayList<BoardDO> getSearchBoard(String keyword){
+
+        ArrayList<BoardDO> boardList = new ArrayList<BoardDO>();
+        String keyword1 = "%" + keyword + "%";
+        System.out.println(keyword1);
+        sql = "select * from board where title like ? or contents like ? or area like ?";
+        try {
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1,keyword1);
+            pstmt.setString(2,keyword1);
+            pstmt.setString(3,keyword1);
+
+            rs = pstmt.executeQuery();
+            System.out.println(rs);
+
+            while(rs.next()) {
+            System.out.println(rs.getString("boardNo"));
+                BoardDO boardDO = new BoardDO();
+                boardDO.setBoardNo(rs.getInt("boardNo"));
+                boardDO.setUserId(rs.getString("userId"));
+                boardDO.setTitle(rs.getString("title"));
+                boardDO.setContents(rs.getString("contents"));
+                boardDO.setArea(rs.getString("area"));
+
+                boardList.add(boardDO);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            if(pstmt != null) {
+                try {
+                    pstmt.close();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return boardList;
+    }
 }
 
