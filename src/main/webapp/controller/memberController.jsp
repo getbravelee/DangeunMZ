@@ -3,25 +3,33 @@
 <%@ page import="java.util.*, model.*" %>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>JSP 게시판 웹 사이트</title>
-</head>
-<body>
+
 <%
     if(request.getMethod().equals("POST")) {
         request.setCharacterEncoding("UTF-8");
         String command = request.getParameter("command");
         MemberDAO memberDAO = new MemberDAO();
 
+        if(command != null && command.equals("myLog")) {
+            if(session.getAttribute("userId") == null) {
+                pageContext.forward("/WEB-INF/views/login.jsp");
+            }
+            else {
+                String userId = (String)session.getAttribute("userId");
+                request.setAttribute("member", memberDAO.getMember(userId));
+                pageContext.forward("/WEB-INF/views/myPage.jsp");
+            }
+        }
+
         // login 기능
-        if(command != null && command.equals("login")){
+        else if(command != null && command.equals("login")){
             String script = "";
-            int result = memberDAO.isLogin(request.getParameter("userId"), request.getParameter("password"));
+            String userId = request.getParameter("userId");
+            int result = memberDAO.isLogin(userId, request.getParameter("password"));
             switch(result) {
-                case 1 : pageContext.forward("/WEB-INF/views/index.jsp");
+                case 1 :
+                    session.setAttribute("userId",userId);
+                    response.sendRedirect("boardPageController.jsp");
                     break;
                 case 0 : script = "alert('비밀번호가 틀립니다.');";
                     break;
@@ -45,14 +53,41 @@
             memberDO.setName(request.getParameter("name"));
             memberDO.setGender(request.getParameter("gender"));
             memberDO.setArea(request.getParameter("area"));
-            memberDAO.insertMemberInfo(memberDO);
+            memberDAO.insertMember(memberDO);
             pageContext.forward("/WEB-INF/views/login.jsp");
         }
+        // 회원 정보 수정
+        else if(command != null && command.equals("updateMember")) {
+
+            MemberDO memberDO = new MemberDO();
+            memberDO.setUserId(request.getParameter("userId"));
+            memberDO.setPassword(request.getParameter("password"));
+            memberDO.setEmail(request.getParameter("email"));
+            memberDO.setName(request.getParameter("name"));
+            memberDO.setGender(request.getParameter("gender"));
+            memberDO.setArea(request.getParameter("area"));
+
+            memberDAO.updateMember(memberDO);
+            session.invalidate();
+            pageContext.forward("/WEB-INF/views/login.jsp");
+        }
+        else if(command != null && command.equals("deleteMember")) {
+            String userId = request.getParameter("userId");
+            String password = request.getParameter("password");
+            System.out.println(userId);
+            System.out.println(password + "Test");
+            if(memberDAO.deleteMember(userId, password) == 1) {
+                session.invalidate();
+                pageContext.forward("/WEB-INF/views/login.jsp");
+            } else {
+                pageContext.forward("/WEB-INF/views/myPage.jsp");
+            }
+        }
+
     }
 
     // memberController 기본화면
-    pageContext.forward("/WEB-INF/views/login.jsp");
-
+    else {
+        pageContext.forward("/WEB-INF/views/login.jsp");
+    }
 %>
-</body>
-</html>

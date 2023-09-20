@@ -29,8 +29,8 @@
                     <i class="fa-solid fa-magnifying-glass" style="color: #e2520f;"></i>
                 </button>
             </form>
-            <form method="post">
-                <button class="menu" name="login" value="login">
+            <form method="post" action="../../dangeun_mz_war/controller/memberController.jsp">
+                <button class="menu" name="command" value="myLog">
                     <i class="fa-solid fa-bars" style="color: #e2520f;"></i>
                 </button>
             </form>

@@ -38,7 +38,7 @@
 
     <section class="category">
         <div id="container-category">
-            <form method="post" class="ctgr" >
+            <form method="post" class="ctgr">
                 <input name="page" type="submit" class="btn-category" value="홈">
                 <input name="page" type="submit" class="btn-category" value="게시판">
                 <input name="page" type="submit" class="btn-category" value="게시글 작성">
@@ -51,16 +51,16 @@
             <h1>게시판</h1>
         </div>
 
-        <form method="post" class="board-form" name="boardWrite">
+        <form method="post" class="board-form">
 
             <div class="form-group">
                 <h3>작성자</h3>
-                <input type="text" name="userId" id="userId" maxlength="20" class='form-input' placeholder="닉네임을 입력하세요">
+                <input type="text" name="userId" id="userId" maxlength="20" class='form-input' value="${board.userId}"  >
             </div>
 
             <div class="form-group">
                 <h3>제목</h3>
-                <input type="text" name="title" id="title" maxlength="2000" class='form-input' placeholder="제목을 입력하세요">
+                <input type="text" name="title" id="title" maxlength="2000" class='form-input' value="${board.title}" >
             </div>
 
             <%--            <div class="form-group">--%>
@@ -105,11 +105,12 @@
                 <h3>내용</h3>
                 <!-- <textarea id="content" class="form-input" rows="10" style="font-size: 18px;">[동네] : &#10;&#10;[주차] : &#10;&#10;[맵기] : &#10;&#10;[가게 후기] : &#10;&#10;[기타 사항] : </textarea> -->
                 <textarea name="contents" id="contents" class="form-input" rows="10" style="font-size: 18px;"
-                          placeholder="내용을 입력하세요"></textarea>
+                          >${board.userId}</textarea>
             </div>
 
             <div class="form-group">
-                <input type="submit" class="btn btn-red" value="등록">
+                <input type="hidden" name="updateBoard" value="${board.boardNo}">
+                <input type="submit" class="btn btn-red" value="수정">
             </div>
 
         </form>
