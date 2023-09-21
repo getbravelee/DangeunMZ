@@ -25,10 +25,12 @@
         else if(command != null && command.equals("login")){
             String script = "";
             String userId = request.getParameter("userId");
+            String password = request.getParameter("password");
             int result = memberDAO.isLogin(userId, request.getParameter("password"));
             switch(result) {
                 case 1 :
-                    session.setAttribute("userId",userId);
+                    session.setAttribute("userId", userId);
+                    session.setAttribute("password", password);
                     response.sendRedirect("boardPageController.jsp");
                     break;
                 case 0 : script = "alert('비밀번호가 틀립니다.');";
@@ -58,7 +60,7 @@
             pageContext.forward("/WEB-INF/views/login.jsp");
         }
         // 회원 정보 수정
-        else if(command != null && command.equals("updateMember")) {
+        else if(request.getParameter("updateMember") != null && !"null".equals(request.getParameter("updateMember"))) {
 
             MemberDO memberDO = new MemberDO();
             memberDO.setUserId(request.getParameter("userId"));
@@ -76,14 +78,16 @@
         else if(request.getParameter("deleteMember") != null && !"null".equals(request.getParameter("deleteMember"))) {
             String userId = request.getParameter("userId");
             String password = request.getParameter("password");
-            System.out.println(userId);
-            System.out.println(password + "Test");
             if(memberDAO.deleteMember(userId, password) == 1) {
                 session.invalidate();
                 pageContext.forward("/WEB-INF/views/login.jsp");
             } else {
                 pageContext.forward("/WEB-INF/views/myPage.jsp");
             }
+        }
+        else if(request.getParameter("logOut") != null && !"null".equals(request.getParameter("logOut"))) {
+            session.invalidate();
+            pageContext.forward("/WEB-INF/views/login.jsp");
         }
 
     }

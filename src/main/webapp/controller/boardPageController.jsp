@@ -85,10 +85,46 @@
 //        else if(request.getParameter("boardWrite") != null && !"null".equals(request.getParameter("boardWrite"))){
         else{
             BoardDO boardDO = new BoardDO();
-            boardDO.setUserId(request.getParameter("userId"));
-            boardDO.setTitle(request.getParameter("title"));
-            boardDO.setArea(request.getParameter("area"));
-            boardDO.setContents(request.getParameter("contents"));
+
+            String directory = "D:/multicampus_project/DangeunMZ/src/main/webapp/upload";
+            int sizeLimit = 1024 * 1024 * 5;		// 5MB 제한
+            MultipartRequest multi = new MultipartRequest(request, directory, sizeLimit,
+                    "UTF-8", new DefaultFileRenamePolicy());
+
+            String picturePath = "";
+            String paramName = "";
+            String savedName = "";
+
+            @SuppressWarnings("unchecked")
+            Enumeration<String> paramNames = multi.getParameterNames();// paramNames = [userId, title...]
+
+            while(paramNames.hasMoreElements()) {
+                paramName = (String)paramNames.nextElement(); // 'userId' 'title' ...
+                System.out.println(multi.getParameter(paramName));
+                if(paramName.equals("userId")) {
+                    boardDO.setUserId(multi.getParameter(paramName));
+                }
+                else if(paramName.equals("title")) {
+                    boardDO.setTitle(multi.getParameter(paramName));
+                }
+                else if(paramName.equals("area")) {
+                    boardDO.setArea(multi.getParameter(paramName));
+                }
+                else if(paramName.equals("contents")) {
+                    boardDO.setContents(multi.getParameter(paramName));
+                }
+            }
+
+            @SuppressWarnings("unchecked")
+            Enumeration<String> fileNames = multi.getFileNames();
+
+            if(fileNames.hasMoreElements()) {
+                paramName = fileNames.nextElement();
+                savedName = multi.getFilesystemName(paramName);
+            }
+
+            picturePath = "/dangeun_mz_war/upload/" + savedName;
+            boardDO.setPicture(picturePath);
 
             boardDAO.insertBoard(boardDO);
             request.setAttribute("boardList", boardDAO.getAllBoard());
