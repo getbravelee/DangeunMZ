@@ -51,16 +51,16 @@
             <h1>게시판</h1>
         </div>
 
-        <form method="post" class="board-form">
+        <form method="post" enctype="multipart/form-data" class="board-form" id="uploadForm">
 
             <div class="form-group">
                 <h3>작성자</h3>
-                <input type="text" name="userId" id="userId" maxlength="20" class='form-input' value="${board.userId}"  >
+                <input type="text" name="userId" id="userId" maxlength="20" class='form-input' value="<%= session.getAttribute("userId") %>" readonly>
             </div>
 
             <div class="form-group">
                 <h3>제목</h3>
-                <input type="text" name="title" id="title" maxlength="2000" class='form-input' value="${board.title}" >
+                <input type="text" name="title" id="title" maxlength="2000" class='form-input' placeholder="제목을 입력하세요" value="${board.title}">
             </div>
 
             <%--            <div class="form-group">--%>
@@ -70,35 +70,23 @@
 
             <div class="form-group">
                 <h3>지역</h3>
-                <select id="area" name="area" class="form-input">
-                    <option value="동구">지역을 선택해 주세요</option>
-                    <option value="동구">동구</option>
-                    <option value="서구">서구</option>
-                    <option value="남구">남구</option>
-                    <option value="북구">북구</option>
-                    <option value="수영구">수영구</option>
-                    <option value="해운대구">해운대구</option>
-                    <option value="부산진구">부산진구</option>
-                    <option value="동래구">동래구</option>
-                </select>
+                <input type="text" name="area" class="form-input" value="${board.area}">
             </div>
 
-            <%--            <div class="form-group">--%>
-            <%--                <legend><h3>이미지 선택</h3></legend>--%>
-            <%--                <br/>--%>
+            <div class="form-group">
+                <legend><h3>이미지 선택</h3></legend>
+                <br/>
 
-            <%--                <label for="imgType">파일 종류</label>--%>
-            <%--                <select name="imgType" id="imgType">--%>
-            <%--                    <option selected>PNG</option>--%>
-            <%--                    <option>JPG</option>--%>
-            <%--                    <option>GIF</option>--%>
-            <%--                </select><br/>--%>
+                <label for="imgType">파일 종류</label>
+                <select name="imgType" id="imgType">
+                    <option selected>PNG</option>
+                    <option>JPG</option>
+                    <option>GIF</option>
+                </select><br/>
 
-            <%--                <input type="file" name="picture" id="picture" maxlength="2000" class='form-input'--%>
-            <%--                       style="margin-bottom: 15px;" required>--%>
-
-            <%--                <input type="submit" value="업로드"/>--%>
-            <%--            </div>--%>
+                <input type="file" name="picture" id="picture" maxlength="2000" class='form-input'
+                       style="margin-bottom: 15px;" required>
+            </div>
 
 
             <div class="form-group">

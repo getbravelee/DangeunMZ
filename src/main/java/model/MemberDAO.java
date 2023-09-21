@@ -1,7 +1,6 @@
 package model;
 import java.sql.*;
 
-
 public class MemberDAO {
     private Connection conn;
     private PreparedStatement pstmt;

@@ -62,7 +62,7 @@ public class BoardDAO {
     public int updateBoard(BoardDO boardDO){
         int rowCount = 0;
 
-        sql = "update board set userId = ?, title = ?, contents = ?, area = ?" +
+        sql = "update board set userId = ?, title = ?, contents = ?, area = ?, picture = ?" +
                 "where boardNo = ?";
 
         try{
@@ -71,8 +71,10 @@ public class BoardDAO {
             pstmt.setString(2, boardDO.getTitle());
             pstmt.setString(3, boardDO.getContents());
             pstmt.setString(4, boardDO.getArea());
+            pstmt.setString(5, boardDO.getPicture());
 
-            pstmt.setInt(5, boardDO.getBoardNo());
+
+            pstmt.setInt(6, boardDO.getBoardNo());
 
 
             rowCount = pstmt.executeUpdate();

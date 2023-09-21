@@ -1,5 +1,6 @@
 package model;
 
+
 public class BoardDO {
 
     private int boardNo;

@@ -66,7 +66,7 @@
             {
                 pageURL = "/WEB-INF/views/boardPage.jsp";
             }
-             pageContext.forward(pageURL);
+            pageContext.forward(pageURL);
         }
 
         //검색

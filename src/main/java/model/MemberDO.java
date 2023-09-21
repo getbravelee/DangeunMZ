@@ -1,5 +1,6 @@
 package model;
 
+
 public class MemberDO {
     private String userId;
     private String password;

@@ -78,9 +78,7 @@
                         <c:forEach items="${boardList}" var="boardDO">
                             <div class="restaurant-list-item">
                                 <div class="img">
-<%--                                    <a href="${url}?search=${boardDO.userId}"><img src="${--%>
-<%--                              imgs[board.img]--%>
-<%--                            } "style="width: 300px; height: 300px; border-radius: 15px;"></a>--%>
+                                    <div class="img" style="background-image: url(${boardDO.picture}); width: 350px; height: 300px;"></div>
                                 </div>
                                 <div class="detail">
                                     <div class="boardListPage-header">

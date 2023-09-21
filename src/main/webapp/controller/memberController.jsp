@@ -2,8 +2,6 @@
          pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, model.*" %>
 
-
-
 <%
     if(request.getMethod().equals("POST")) {
         request.setCharacterEncoding("UTF-8");
