@@ -40,6 +40,7 @@
             }
 
         }
+        //회원 가입 페이지 이동
         else if(command != null && command.equals("join")) {
             pageContext.forward("/WEB-INF/views/join.jsp");
         }
@@ -71,7 +72,8 @@
             session.invalidate();
             pageContext.forward("/WEB-INF/views/login.jsp");
         }
-        else if(command != null && command.equals("deleteMember")) {
+        //회원탈퇴기능
+        else if(request.getParameter("deleteMember") != null && !"null".equals(request.getParameter("deleteMember"))) {
             String userId = request.getParameter("userId");
             String password = request.getParameter("password");
             System.out.println(userId);

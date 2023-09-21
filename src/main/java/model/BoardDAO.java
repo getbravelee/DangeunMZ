@@ -37,6 +37,8 @@ public class BoardDAO {
             pstmt.setString(2, boardDO.getTitle());
             pstmt.setString(3, boardDO.getArea());
             pstmt.setString(4, boardDO.getContents());
+            pstmt.setString(5, boardDO.getPicture());
+
 
             rowCount = pstmt.executeUpdate();
         }

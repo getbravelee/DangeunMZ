@@ -3,6 +3,8 @@
 %>
 <%@ page import="model.BoardDAO" %>
 <%@ page import="model.BoardDO" %>
+<%@ page import="com.oreilly.servlet.MultipartRequest" %>
+<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 
 <%
 

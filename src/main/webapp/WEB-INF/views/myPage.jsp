@@ -22,22 +22,24 @@
             <div class="header-left">
                 <h1 class="brand">C</h1>
             </div>
-            <form class="keyword-search keyword-search-main" name="search" action="searchListPage.html">
+            <form class="keyword-search keyword-search-main" name="search" method="post">
                 <input type="text" name='search' id="search" class="searchText" placeholder="지역, 음식, 레스토랑명 검색" required value>
                 <button type="submit" class="searchButton">
                     <i class="fa-solid fa-magnifying-glass" style="color: #e2520f;"></i>
                 </button>
             </form>
-            <button class="menu">
-                <i class="fa-solid fa-bars" style="color: #e2520f;"></i>
-            </button>
+            <form method="post" action="../../dangeun_mz_war/controller/memberController.jsp">
+                <button class="menu" name="command" value="myLog">
+                    <i class="fa-solid fa-user" style="color: #e2520f;"></i>
+                </button>
+            </form>
         </div>
     </header>
 
 
     <section class="category">
         <div id="container-category">
-            <form method="post" class="ctgr">
+            <form method="post" class="ctgr" action="../../dangeun_mz_war/controller/boardPageController.jsp">
                 <input name="page" type="submit" class="btn-category" value="홈">
                 <input name="page" type="submit" class="btn-category" value="게시판">
                 <input name="page" type="submit" class="btn-category" value="게시글 작성">
@@ -57,10 +59,10 @@
                     <input type="text" name="userId" id="userId" class='form-input' value="${member.userId}" readonly>
                 </div>
 
-                <div class="form-group">
-                    <h3>비밀번호</h3>
-                    <input type="password" name="password" id="password" class='form-input'>
-                </div>
+            <div class="form-group">
+                <h3>비밀번호</h3>
+                <input type="password" name="password" id="password" class='form-input' value="${member.password}">
+            </div>
 
                 <div class="form-group">
                     <h3>이메일</h3>

@@ -1,5 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    if(session.getAttribute("userId") == null){
+        out.println("<script>alert('로그인 후 글 작성이 가능합니다!!');</script>");
+        response.sendRedirect("../../dangeun_mz_war/controller/boardPageController.jsp");
+    } else{
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -150,3 +157,6 @@
 </body>
 
 </html>
+<%
+    }
+%>
