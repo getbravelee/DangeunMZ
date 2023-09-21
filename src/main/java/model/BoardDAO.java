@@ -29,7 +29,7 @@ public class BoardDAO {
     //게시글 작성
     public int insertBoard (BoardDO boardDO) {
         int rowCount = 0;
-        sql = "insert into board (boardNo,userId, title, area, contents) values (seq_boardno.nextval,?, ?, ?, ?)";
+        sql = "insert into board (boardNo,userId, title, area, contents, picture) values (seq_boardno.nextval, ?, ?, ? ,?, ?)";
 
         try {
             pstmt = conn.prepareStatement(sql);
@@ -136,6 +136,7 @@ public class BoardDAO {
                 boardDO.setTitle(rs.getString("title"));
                 boardDO.setArea(rs.getString("area"));
                 boardDO.setContents(rs.getString("contents"));
+                boardDO.setPicture(rs.getString("picture"));
 
                 boardList.add(boardDO);
             }
@@ -176,6 +177,7 @@ public class BoardDAO {
                 boardDO.setTitle(rs.getString("title"));
                 boardDO.setArea(rs.getString("area"));
                 boardDO.setContents(rs.getString("contents"));
+                boardDO.setPicture(rs.getString("picture"));
             }
 
         }catch(Exception e){
@@ -219,6 +221,7 @@ public class BoardDAO {
                 boardDO.setTitle(rs.getString("title"));
                 boardDO.setContents(rs.getString("contents"));
                 boardDO.setArea(rs.getString("area"));
+                boardDO.setPicture(rs.getString("picture"));
 
                 boardList.add(boardDO);
             }

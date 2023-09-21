@@ -31,7 +31,7 @@
             </form>
             <form method="post" action="../../dangeun_mz_war/controller/memberController.jsp">
                 <button class="menu" name="command" value="myLog">
-                    <i class="fa-solid fa-bars" style="color: #e2520f;"></i>
+                    <i class="fa-solid fa-user" style="color: #e2520f;"></i>
                 </button>
             </form>
         </div>

@@ -30,7 +30,7 @@
             </form>
             <form method="post" action="../../dangeun_mz_war/controller/memberController.jsp">
                 <button class="menu" name="command" value="myLog">
-                    <i class="fa-solid fa-bars" style="color: #e2520f;"></i>
+                    <i class="fa-solid fa-user" style="color: #e2520f;"></i>
                 </button>
             </form>
         </div>
@@ -52,30 +52,26 @@
         </div>
 
         <form class="board-form" method="post">
-            <fieldset>
-                <div class="form-group">
-                    <h3>아이디</h3>
-                    <input type="text" name="userId" id="userId" class='form-input' placeholder="아이디를 입력하세요" />
-                </div>
+            <div class="form-group">
+                <h3>아이디</h3>
+                <input type="text" name="userId" id="userId" class='form-input' placeholder="아이디를 입력하세요" />
+            </div>
 
-                <div class="form-group">
-                    <h3>비밀번호</h3>
-                    <input type="password" name="password" id="password" class='form-input' placeholder="비밀번호를 입력하세요" />
-                </div>
+            <div class="form-group">
+                <h3>비밀번호</h3>
+                <input type="password" name="password" id="password" class='form-input' placeholder="비밀번호를 입력하세요" />
+            </div>
 
-                <div class="form-group">
-                    <input type="hidden" name="command" value="login" />
-                    <input type="submit" value="로그인" class="login btn btn-red"/>
-                </div>
-            </fieldset>
+            <div class="form-group">
+                <input type="hidden" name="command" value="login" />
+                <input type="submit" value="로그인" class="login btn btn-red"/>
+            </div>
         </form>
         <form class="board-form" method="post">
-            <fieldset>
-                <div class="form-group">
-                    <input type="hidden" name="command" value="join" />
-                    <input type="submit" value="회원가입" class="signup btn btn-red"/>
-                </div>
-            </fieldset>
+            <div class="form-group">
+                <input type="hidden" name="command" value="join" />
+                <input type="submit" value="회원가입" class="signup btn btn-red"/>
+            </div>
         </form>
     </main>
 </section>
