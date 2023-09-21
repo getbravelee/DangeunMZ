@@ -29,7 +29,7 @@
             </form>
             <form method="post">
                 <button class="menu" name="login" value="login">
-                    <i class="fa-solid fa-bars" style="color: #e2520f;"></i>
+                    <i class="fa-solid fa-user" style="color: #e2520f;"></i>
                 </button>
             </form>
         </div>

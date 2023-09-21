@@ -53,39 +53,38 @@
         </div>
 
         <form class="board-form" method="post">
-            <fieldset>
-                <div class="form-group">
-                    <h3>아이디</h3>
-                    <input type="text" name="userId" id="userId" class='form-input' value="${member.userId}" readonly>
-                </div>
+            <div class="form-group">
+                <h3>아이디</h3>
+                <input type="text" name="userId" id="userId" class='form-input' value="${member.userId}" readonly>
+            </div>
 
             <div class="form-group">
                 <h3>비밀번호</h3>
                 <input type="password" name="password" id="password" class='form-input' value="${member.password}">
             </div>
 
-                <div class="form-group">
-                    <h3>이메일</h3>
-                    <input type="email" name="email" id="email" class='form-input' value="${member.email}">
-                </div>
+            <div class="form-group">
+                <h3>이메일</h3>
+                <input type="email" name="email" id="email" class='form-input' value="${member.email}">
+            </div>
 
-                <div class="form-group">
-                    <h3>이름</h3>
-                    <input type="text" name="name" id="name" class='form-input' value="${member.name}">
-                </div>
+            <div class="form-group">
+                <h3>이름</h3>
+                <input type="text" name="name" id="name" class='form-input' value="${member.name}">
+            </div>
 
-                <div class="form-group">
-                    <h3>성별</h3>
-                    <select name="gender" id="gender" class="form-input">
-                        <option value="male">남자</option>
-                        <option value="female">여자</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <h3>성별</h3>
+                <select name="gender" id="gender" class="form-input">
+                    <option value="male">남자</option>
+                    <option value="female">여자</option>
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <h3>거주 지역</h3>
-                    <input type="text" name="area" id="area" class='form-input'value="${member.area}">
-                </div>
+            <div class="form-group">
+                <h3>거주 지역</h3>
+                <input type="text" name="area" id="area" class='form-input'value="${member.area}">
+            </div>
 
                 <div class="form-group">
                     <input type="hidden" name="command" value="updateMember" />
