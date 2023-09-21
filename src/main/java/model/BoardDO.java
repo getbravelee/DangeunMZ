@@ -7,6 +7,7 @@ public class BoardDO {
     private String title;
     private String contents;
     private String area;
+    private String picture;
 
     public BoardDO(){
     }
